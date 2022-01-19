@@ -1,0 +1,1008 @@
+PROGRAME PYTHON
+
+###while Loops
+i = 1
+while i < 5:
+    print('i is: {}'.format(i))
+    i = i+1
+
+###list comprehension
+
+x = [1,2,3,4]
+
+out = []
+for item in x:
+    out.append(item**2)
+print(out)
+
+#em list comprehension
+[item**2 for item in x]
+
+
+## Funções
+def square(x):
+    return x**2
+
+out = square(2)
+
+
+## Expressões lamda
+def vezes2(var):
+    return var*2
+vezes2(2)
+
+#
+lambda var: var*2
+
+
+## map e filter
+seq = [1,2,3,4,5]
+map(vezes2,seq)
+
+list(map(vezes2,seq)) #out [2, 4, 6, 8, 10]
+
+list(map(lambda var: var*2,seq)) # out [2, 4, 6, 8, 10]
+
+list(filter(lambda item: item%2 == 0,seq)) # out [2, 4]
+
+
+PROGRAME PYTHON
+
+ 
+variavel = [valor1] if [condição verdadeira] else [valor2]
+[executar algo] if [condição verdadeira] else [executar outra coisa]
+
+Códigos utilizados:
+a = 1 if variavel == 1 else 2
+func1 if variavel == 1 else func2
+func1 if variavel == 1 else None
+
+#Python PANDAS - Como filtrar dados com LOC e ILOC
+Códigos utilizados:
+df.loc[['lin1', 'lin3']]
+df.iloc[[0, 2]]
+df.iloc[:3]
+df.loc['lin1': 'lin3']
+df.loc[(df['col1'] == 2) & (df['col2'] == 4)]
+df.loc[(df['col1'] == 2) | (df['col2'] == 4)]
+df.iloc[0] = 0
+df.iloc[2] = -df.iloc[2]
+
+Python PANDAS - A melhor forma de filtrar dados numéricos
+Códigos utilizados:
+df[df['col1'] == 6]
+df[(df['col1'] == 6) | (df['col2'] == 6)]
+df[(df['col1'] == 6) & (df['col2'] == 6)]
+df[df['col1'].between(6, 10)]
+df[~df['col1'].between(6, 10)]
+df[df.sum(axis=1) == 12]
+df[df.max(axis=1) == 12]
+df[df['col1'].isin([6, 12])]
+
+PYTHON - Lista de listas para lista (ACHATAR LISTAS)
+Códigos utilizados:
+l_final = []
+for sub_l in l:
+    for item in sub_l:
+        l_final.append(item)
+l_final = [item for sub_l in l for item in sub_l]
+def flatten_list(l):
+    return [item for sub_l in l for item in sub_l]
+
+Python PANDAS - A melhor forma de filtrar dados string
+Códigos utilizados:
+df[df['col1'] == 'string exata']
+df[df['col1'].isin(['string_exata1', 'string_exata2'])]
+df[df['col1'].str.len() == 4]
+df[df['col3'].str.contains('os|e|\+')] # O PIPE | OU & devem ser utilizados para concatenar e o slash \ para caracteres especiais
+
+Python PANDAS - Como filtrar valores missing (nan)
+Códigos utilizados: 
+df[df['col1'].isnull()]
+df[df['col1'].isna()]
+df[~df['col1'].isnull()]
+df[df['col1'].notnull()]
+df[df.isnull().any(axis=1)]
+df[df.isnull().sum(axis=1) == 2]
+
+Python MATPLOTLIB - Como mover a legenda
+Códigos útilizados:
+import matplotlib.pyplot as plt
+plt.legend(ncol=3, loc='upper right', bbox_to_anchor=(1.435, 1))
+plt.legend(ncol=1, loc='lower left', bbox_to_anchor=(0, 1))
+
+Python MATPLOTLIB - Como configurar o eixo x
+Códigos:
+from textwrap import wrap
+import matplotlib.pyplot as plt
+labels = df.index.tolist()
+labels = ['\n'.join(wrap(l, 12)) for l in labels]
+plt.xticks(range(len(labels)), labels, rotation=0)
+
+Python PANDAS - Como fazer gráficos
+Códigos útilizados:
+df.plot(y='Under 1 year', kind='bar')
+df.plot(kind='bar', subplots=True, layout=(3,3), figsize=(20,20), sharey=True)
+df.plot(kind='bar', stacked=True)
+
+Python PANDAS - Como excluir linhas e colunas
+Códigos útilizados:
+df.drop('col1', axis=1, inplace=True)
+df.drop(0, axis=0, inplace=True)
+df.drop(['col1’, ‘col2’], axis=1, inplace=True)
+df.drop(['col1’, ‘col2’], axis=0, errors='ignore')
+
+Python PANDAS - Como excluir linhas e colunas com NaN
+Códigos útilizados:
+df.dropna(axis=1)
+df.dropna(how='all’)
+df.dropna(thresh=3)
+df.dropna(axis=1, subset=[0])
+df.dropna(subset=['col2'])
+
+
+Python PANDAS - Formatar casas decimais e números
+Códigos útilizados:
+pd.set_option('display.precision’, 2)
+pd.set_option('float_format', '{:.3f}'.format)
+pd.reset_option('^display.', silent=True)
+
+Python PANDAS - Como mostrar mais colunas
+Códigos útilizados:
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_colwidth', 50)
+pd.set_option('display.max_rows', None)
+pd.reset_option('^display.', silent=True)
+
+Python PANDAS - Como alterar o nome das colunas
+Códigos útilizados:
+df.columns = ['a', 'b', 'c’]
+df.rename(columns={'a':'col1'}, inplace=True)
+df.columns = ['col 1', 'col 2', 'col 3']
+df.columns = [s.replace(' ', '') for s in df.columns]
+
+Python PANDAS - Como alterar a ordem das colunas
+Códigos útilizados:
+df[['a', 'b', 'c’]]
+colunas = df.columns.to_list()
+colunas.sort()
+df[colunas]
+df.sort_values(by=0, axis=1, ascending=False)
+
+Python SEABORN - Como alterar cor de barras específicas
+Códigos útilizados:
+cores = ['r' if a 'maior que' 10 else 'b' for a in df['col2'].sort_values(ascending=False)] 
+
+cores = ['r' if a 'maior que' 8 else 'y' if 8 'maior que' a 'maior ou igual a' 15 else 'b' for a in df['col2'].sort_values(ascending=False)]
+
+def cor(a):
+    if a 'maior que' 8:
+        return 'r'
+    elif 8 'maior que' a 'maior ou igual a' 15:
+        return 'y'
+    else:
+        return 'b’
+cores = [cor(a) for a in df['col2'].sort_values(ascending=False)]
+
+sns.barplot(data=df.sort_values('col2', ascending=False), x='col1’, y='col2’, ci=False, palette=cores)
+
+
+Python SEABORN - Como mostrar valor na barra
+Códigos útilizados:
+for i in plot.patches:
+    plot.annotate(i.get_height(),
+                  (i.get_x() + i.get_width() / 2, i.get_height()),
+                  ha='center',
+                  va='baseline',
+                  fontsize=12,
+                  color='black',
+                  xytext=(0, 1),
+                  textcoords='offset points')
+
+
+Python - SEABORN - MATPLOTLIB - Alterar tamanho do plot
+Códigos útilizados:
+plt.figure(figsize=(20,10))
+sns.set(rc={'figure.figsize':(20,10)})
+
+
+
+Python SEABORN - MATPLOTLIB - Como salvar gráficos
+Códigos útilizados:
+plot.get_figure().savefig(‘graficos/teste.png')
+plt.savefig(‘graficos/teste.png')
+
+
+Python SEABORN - MATPLOTLIB - Criar linhas no gráfico
+Códigos útilizados:
+plt.axhline(15, 0, 1, color='r', **{'ls':'--', 'lw':5})
+plt.axvline(15, 0, 1, color='r', **{'ls':'--', 'lw':5})
+
+
+Python SEABORN - MATPLOTLIB - Criar destaques no gráfico
+Códigos útilizados:
+plt.axhspan(df['waiting'].min(), df['waiting'].max(), 0, .5, color='orange', **{'ls':'--', 'lw':2, 'fill':False})
+plt.axhspan(df['waiting'].min(), df['waiting'].max(), .5, 1, color='b', **{'ls':'--', ‘lw':2, 'fill':False})
+
+plt.axvspan(df['duration'].min(), df['duration'].max(), 0, .47, color='orange', **{'ls':'--', 'lw':2, 'fill':False})
+plt.axvspan(df['duration'].min(), df['duration'].max(), .47, 1, color='b', **{'ls':'--', 'lw':2, 'fill':False})
+
+
+Python PANDAS - Como resolver UnicodeDecodeError
+Códigos útilizados:
+pd.read_csv('http://repositorio.dados.gov.br/sest/..., encoding='ISO-8859-1', sep=';')
+
+
+Python - Como alinhar o texto no print
+Códigos útilizados:
+print(f"{variavel1:'simbolo de menor que'10} {variavel2: 'simbolo de maior que' 15}")
+
+Python PANDAS - Groupby: como agrupar dados
+Códigos útilizados:
+df.groupby('SG_UF’).sum()
+df.groupby(['SG_UF', 'SG_PARTIDO']).sum()
+df.groupby('SG_UF').agg({'QT_VOTOS_NOMINAIS':'sum'})
+
+df.groupby('SG_UF').size()
+len(df[df['SG_UF'] == 'AC’])
+ 
+df.groupby(['SG_UF', 'SG_PARTIDO', 'DS_CARGO', 'NR_TURNO']).sum().head(50)
+.reset_index ou as_index=False
+
+df.groupby(['NR_TURNO', 'SG_UF', 'SG_PARTIDO', 'DS_CARGO', 'VOTOS', 'VOTOS'], axis=1).sum()
+
+
+
+Python PANDAS - Pivot: como pivotar dados
+Códigos útilizados:
+a.pivot_table(index='SG_PARTIDO', columns='DS_CARGO', values='VOTOS')
+
+
+Python PANDAS - Como alterar uma coluna baseada em outra
+Códigos útilizados:
+df.loc[df['col1'] == 'V', 'col2'] = -df['col2’]
+
+df.loc[(df['col1'] == 'V') & (df['col2'] simbolo de maior que 10), 'col2'] = -df['col2’]
+
+df.loc[df['col2'] 'simbolo de maior que' 10, 'maior_que_10'] = 'sim'
+df.loc[df['col2'] 'simbolo de menor que'= 10, 'maior_que_10'] = 'nao'
+df.fillna('não')
+
+
+Python PANDAS - Como filtrar colunas
+Códigos útilizados:
+df.loc[:,’col1’:’col3’]
+df.iloc[:,1:]
+df.iloc[:,::-1]
+df.iloc[:,-1]
+
+
+Python PANDAS - Como fazer cálculos entre colunas
+Códigos útilizados:
+df['col3'] = df['col1'] + df['col2’]
+Funciona igual para string ('a' + ‘a’ = ‘aa’)
+
+df.groupby(['col1', 'col4', 'col1'], axis=1).sum()
+
+
+
+Python PANDAS - Concat: unir linhas ou colunas do dataframe
+Códigos útilizados:
+pd.concat([df1, df2], axis=0, ignore_index=True)
+pd.concat([df1, df2], axis=1, ignore_index=True)
+pd.concat([df1.set_index('col1'), df2.set_index('col1')], axis=1)
+pd.concat([df1, df2], axis=0, keys=['df1', 'df2'], names=[1, 2])
+verify_integrity= True ou False
+join='outer’ ou 'inner'
+
+
+Python PANDAS - Como unir dataframes com JOIN
+Códigos útilizados:
+df1.join(df2, rsuffix='_r', lsuffix='_l')
+df1.join(df2.set_index('col1'), on='col1’)
+How= 'left', 'right', 'inner' ou 'outer'
+
+
+Python PANDAS - A melhor forma de unir dataframes com MERGE (Procv ou Vlookup)
+Códigos útilizados:
+df1.merge(df2)
+df1.merge(df2, how=‘outer’)
+df1.merge(df2, on='col1', how='outer’) 
+df1.merge(df2, left_on='col1', right_on='col1’)
+df1.merge(df2, right_index=True, left_index=True, how='outer’)
+df1.merge(df2, right_index=True, left_index=True, how='outer’, suffixes=['_df1', '_df2'])
+df1.merge(df2, on='col1', how='outer', indicator=True)
+df3.merge(df1, on='col1', how='left', validate='1:m')
+Outros exemplos:
+pd.merge(tabela_1, tabela_2, on=['campo_em_comum'], how='left')
+pd.merge(tabela_1, tabela_2, on=['campo_em_comum_1', 'campo_em_comum_2'], how='left')
+
+
+
+
+Python PANDAS - As 4 MELHORES formas de criar uma coluna
+Códigos útilizados:
+df['col3'] = 0
+df['col3'] = df['col1'] + df['col2']
+df.insert(2, 'col3', df['col1'], allow_duplicates=True) inplace
+df.assign(col5=[13,14,15,16, 17, 18])
+
+Como comparar linhas da mesma coluna - Respondendo comentários #01
+Códigos útilizados:
+df['nova coluna'] = df['coluna base'].shift() - df['coluna base'].shift(-1)
+df.loc[df['nova coluna'] 'menor que' 0, 'nova coluna'] = -1
+df.loc[df['nova coluna'] 'maior que' 0, 'nova coluna'] = 1
+df.loc[df['nova coluna'] == 0, 'nova coluna'] = 0
+df['nova coluna'].replace({-1:'de baixo é maior', 1:'de cima é maior', 0:'iguais'}, inplace=True)
+
+
+Python PANDAS - Como fazer cálculo em janelas rolantes
+Códigos útilizados:
+df.rolling(window=7).mean().head(20)
+.sum() e .std()
+dfrolling(window=7, min_periods=7).mean()
+dfrolling(window=7, min_periods=7, center=True)
+df.rolling(window=7, min_periods=7, center=True, on='Data').mean()
+df.rolling(window=7, min_periods=7, center=True, on='Views do Blog').mean()
+
+Python PANDAS - Como fazer linha e coluna com TOTAL
+Códigos útilizados:
+df1['Total'] = df1.sum(axis=1)
+df1.loc['Total'] = df1.sum()
+
+
+Python PANDAS - Ler e Gerar arquivos do EXCEL
+Códigos útilizados:
+pd.read_excel('Pasta1.xlsx', sheet_name='Planilha1', header=None, names=['col1', 'col2', 'col3'], index_col=None, usecols=['col1','col2', 'col3’])
+df.to_excel('teste.xlsx', sheet_name='Teste', na_rep='#N/A', header=True, index=False)
+
+
+Python PANDAS - Como contar dados no dataframe
+Códigos útilizados:
+df['col3'].value_counts()
+dropna=False
+normalize=True,
+sort=True,
+ascending=False,
+df['col1'].value_counts(bins=4)
+pd.cut(df['col1'], 4).value_counts()
+
+
+Python PANDAS - Como fazer soma cumulativa
+Códigos útilizados:
+df['Views do Blog'].cumsum()
+df['Views do Blog'].cumsum(skipna=True)
+df['Views do Blog'].cummax()
+df['Views do Blog'].cummin()
+df['Views do Blog'].cumprod()
+
+
+Python PANDAS - Operações entre LINHAS da mesma coluna
+Códigos útilizados:
+df['Vendas em mil R$'].diff()
+df['Vendas em mil R$'].pct_change(periods=2, fill_method='bfill')
+
+
+Python PANDAS - Duas formas de CRIAR linhas
+Códigos útilizados:
+df1.append({'col1':1, 'col2':2}, ignore_index=True)
+df1.loc[6] = [1, 2]
+df1.loc[len(df1)] = [1, 2]
+
+
+Python PANDAS - Como unir linhas do dataframe com APPEND
+Códigos útilizados:
+df1.append(df2)
+df1.append(df2, ignore_index=True)
+df1.append({'col1':1}, ignore_index=True) 
+
+
+Python PANDAS - Como contar dados no dataframe
+Códigos útilizados:
+df['col3'].value_counts()
+dropna=False
+normalize=True,
+sort=True,
+ascending=False,
+df['col1'].value_counts(bins=4)
+pd.cut(df['col1'], 4).value_counts()
+
+Python PANDAS - Ler e Gerar arquivos do EXCEL
+Códigos útilizados:
+pd.read_excel('Pasta1.xlsx', sheet_name='Planilha1', header=None, names=['col1', 'col2', 'col3'], index_col=None, usecols=['col1','col2', 'col3’])
+df.to_excel('teste.xlsx', sheet_name='Teste', na_rep='#N/A', header=True, index=False)
+
+
+Python PANDAS - Como fazer linha e coluna com TOTAL
+Códigos útilizados:
+df1['Total'] = df1.sum(axis=1)
+df1.loc['Total'] = df1.sum()
+
+
+Python PANDAS - Como fazer cálculo em janelas rolantes
+Códigos útilizados:
+df.rolling(window=7).mean().head(20)
+.sum() e .std()
+dfrolling(window=7, min_periods=7).mean()
+dfrolling(window=7, min_periods=7, center=True)
+df.rolling(window=7, min_periods=7, center=True, on='Data').mean()
+df.rolling(window=7, min_periods=7, center=True, on='Views do Blog').mean()
+
+
+Python PANDAS - As 4 MELHORES formas de criar uma coluna
+Códigos útilizados:
+df['col3'] = 0
+df['col3'] = df['col1'] + df['col2']
+df.insert(2, 'col3', df['col1'], allow_duplicates=True) inplace
+df.assign(col5=[13,14,15,16, 17, 18])
+
+
+Python EXCEL - Como editar arquivos
+Códigos útilizados:
+!pip install openpyxl
+from openpyxl import *
+workbook = load_workbook(filename="testes/teste.xlsx")
+workbook.save(filename="testes/teste.xlsx")
+workbook = Workbook()
+sheet = workbook.active
+sheet = workbook['Sheet']
+sheet['A1'].value
+sheet['A1'] = ‘b’
+sheet.cell(row=1, column=1).value
+sheet.cell(row=1, column=3, value=0)
+sheet['A1:C2'] 
+for row in sheet.iter_rows():
+    print(row)
+for cols in sheet.iter_cols():
+    print(cols)
+sheet['C2'] = '=AVERAGE(A1:A5)1
+
+
+
+Python - Como formatar DATA no dataframe
+Códigos útilizados:
+df['Data'].astype('datetime64’)
+pd.to_datetime(df['Data’])
+pd.to_datetime(df['Data'], format='%Y%m%d’)
+pd.to_datetime('01/02/2021', format='%d/%m/%Y’)
+pd.to_datetime('01/02/2021', dayfirst=True)
+pd.to_datetime('01/02/2021', dayfirst=True).date()
+pd.to_datetime(df['Data'], format='%d/%m/%Y')
+
+
+Python PANDAS - Como alterar o tipo da coluna
+Códigos útilizados:
+df['Grupo Cód.'] = df['Grupo Cód.'].astype(int) 
+df['Cód. Empresa'] = df['Cód. Empresa'].astype(int)
+pd.to_numeric(df['Grupo Cód.’])
+df['PLoa'] = df['PLoa'].str.replace('.','')
+df.astype({
+    'Exercício':'datetime64',
+    'Grupo Cód.':int,
+    'Cód. Empresa':int,
+    'PLoa':float
+})
+
+
+
+Python PANDAS - Substituir valores COM CONDIÇÃO
+Códigos útilizados:
+df.where(df 'maior que' 10, 'oi’)
+df.mask(df 'maior que' 10, 'oi’)
+df.where(df 'maior que' 10, df.max(axis=1), axis=0)
+
+
+
+Python PANDAS - Como substituir dados ou partes da string no dataframe
+Códigos útilizados:
+df.replace(17, 0)
+df.replace({17:0, 14:1})
+df.replace([17, 14], [0,1])
+df.replace(15, limit=1, method='ffill’)
+inplace=True
+df['col3'].replace('e', 'oi’)
+df['col3'].replace('e', 'oi', regex=True)
+df['col3'].str.replace(‘exemplo', 'oi')
+df['col3'].str.replace('e', 'oi', n=1)
+
+
+Como calcular porcentagem de dados faltantes no dataframe - Respondendo comentários #02
+Códigos útilizados:
+(df.isnull().sum() / df.shape[0]) * 100
+df['col1'].value_counts(dropna=False, normalize=True) * 100
+
+
+Python PANDAS - Como mapear valores na series
+Códigos útilizados:
+df['DS_CARGO'].map('cargo: {}'.format)
+df['DS_CARGO'].map('cargo: {}'.format, na_action='ignore’)
+df['DS_CARGO'].map({'Prefeito': 'teste'})
+
+
+Python PANDAS - Como utilizar FUNÇÕES no dataframe
+Códigos útilizados:
+df.apply(lambda x: 'col1' if x.col1 'maior que' x.col2 else 'col2', axis=1)
+df.apply(lambda x: 'col1' if x.col1 'maior que' x.col2 else 'col2', axis=1, result_type='broadcast')
+df.apply(lambda x: x.col3, axis=1, result_type='expand')
+
+
+Python - Funções ANÔNIMAS (lambda): como utilizar
+Códigos útilizados:
+a = lambda x: x + 1
+a = lambda num: num + 1
+a = lambda x: [i+1 for i in x]
+a = lambda x: [i+1 if i == 3 else i for i in x]
+a = lambda x, y: 'nome: ' + x + ' ' + y
+a('Programe', 'python')
+
+
+Como construir FUNÇÕES no python
+Códigos útilizados:
+def soma(x: (int, float), y: (int, float)) -'maior que' int:
+    return x + y
+def palavra(palavra: str) -'maior que' str:
+    return f'a palavra escolhida é: {palavra}’
+
+
+4 formas de encontrar número de LINHAS e COLUNAS do dataframe - Python PANDAS
+Códigos útilizados:
+len(df)
+len(df.index)
+df.shape[0]
+df.count() .iloc[0]
+l, c = df.shape
+df.shape[1]
+len(df.columns)
+
+
+Python PANDAS - INDÍCE: como modificar, adicionar e resetar
+Códigos útilizados:
+df.reset_index()
+df.reset_index('classe', col_level=0)
+df.reset_index('nome', col_level=1)
+df.reset_index('nome', col_level=1, col_fill='teste')
+
+
+RANGE vs LINSPACE vs ARANGE - Qual a diferença? Python NUMPY
+Códigos útilizados:
+np.linspace(1, 10, 5)
+np.arange(1, 10, 5, dtypes=int)
+[i for i in range(1, 10)
+np.linspace(1, 10, 2, dtype=int)
+np.linspace(1, 10, 5, endpoint=False)
+np.linspace(1, 10, 5, retstep=True)
+np.linspace([1, 2], 10, 5, axis=1)
+np.linspace([1, 2], [10, 20], 5, axis=1)
+
+
+Como salvar o notebook em HTML - Python JUPYTER
+Códigos útilizados:
+fig.write_html("teste.html")
+File - Save as - html
+!jupyter nbconvert --to html --no-input EXCEL.ipynb
+
+
+Como fazer MÚLTIPLOS PLOTS no Seaborn (FacetGrid)
+Códigos útilizados:
+tips = sns.load_dataset("tips")
+sns.FacetGrid(tips, col='time', row='sex’)
+g.map(sns.scatterplot, "total_bill", "tip")
+g.map_dataframe(sns.histplot, x='total_bill’)
+g = sns.FacetGrid(tips, col='time', hue='sex')
+g = sns.FacetGrid(tips, col='time', hue='sex', col_wrap=1)
+g = sns.FacetGrid(tips, col='time', hue='sex', col_wrap=1, sharex=False)
+g = sns.FacetGrid(tips, col='time', hue='sex', sharey=False)
+g = sns.FacetGrid(tips, col='time', hue='sex',height=5, aspect=.5)
+g = sns.FacetGrid(tips, col='time', hue='sex', palette=['r', 'black'])
+g = sns.FacetGrid(tips, col='time', hue='sex', col_order=['Dinner', 'Lunch'])
+g.add_legend()
+
+
+Múltiplos gráficos com PAIRPLOT - Seaborn Python
+Códigos útilizados:
+sns.pairplot(tips)
+sns.pairplot(tips, hue='sex’)
+sns.pairplot(tips, hue='sex', hue_order=['Female', 'Male’])
+sns.pairplot(tips, hue='sex', palette=['r', 'w’])
+sns.pairplot(tips, hue='sex', vars=['tip', 'size’])
+sns.pairplot(tips, hue='sex', x_vars=['tip', 'size’])
+sns.pairplot(tips, hue='sex', kind='reg’)
+sns.pairplot(tips, hue='sex', kind='kde’)
+sns.pairplot(tips, hue='sex', diag_kind='hist’)
+sns.pairplot(tips, hue='sex', markers='x’)
+sns.pairplot(tips, hue='sex', height=5, aspect=0.8)
+sns.pairplot(tips, hue='sex', corner=True)
+
+
+Múltiplos Gráficos - A forma mais VERSÁTIL - MATPLOTLIB Python
+Códigos útilizados:
+figs, axs = plt.subplots(nrows=2, ncols=2)
+figs, axs = plt.subplots(nrows=2, ncols=2, sharex=True)
+figs, axs = plt.subplots(nrows=2, ncols=2, squeeze=False)
+figs, axs = plt.subplots(nrows=2, ncols=2, gridspec_kw={'width_ratios': [2, 1]})
+figs, axs = plt.subplots(nrows=2, ncols=2, figsize=(20,8))
+sns.scatterplot(data=tips, x='total_bill', y='tip', ax=axs[0][1])
+
+
+Como inserir BARRA DE PROGRESSO no python
+Códigos útilizados:
+import time
+Pip install tqdm
+Pip install progressbar
+from tqdm import tqdm
+from tqdm import trange
+import progressbar
+for i in tqdm(range(50)):
+    time.sleep(0.1)
+
+for i in trange(50):
+    time.sleep(0.1)
+
+pbar = tqdm(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'])
+for i in pbar:
+    time.sleep(0.25)
+    pbar.set_description(f'trabalhando no {i}’)
+
+for i in progressbar.progressbar(range(50)):
+    time.sleep(0.1)
+
+bar = progressbar.ProgressBar(max_value=progressbar.UnknownLength)
+for i in range(50):
+    time.sleep(0.1)
+    bar.update(i)
+
+
+
+Como remover linhas duplicadas - PANDAS Python
+Códigos útilizados:
+df.drop_duplicates()
+df.drop_duplicates(subset='col1’)
+df.drop_duplicates(subset='col1', keep='last’)
+df.drop_duplicates(subset='col1', keep=False)
+df.drop_duplicates(ignore_index=True)
+
+
+3 formar de criar um DATAFRAME a partir de uma series
+Códigos útilizados:
+df.groupby('col1')['col2'].sum().to_frame()
+df.groupby('col1')['col2'].sum().to_frame('teste’)
+pd.DataFrame(df.groupby('col1')['col2'].sum())
+
+
+Como EXPORTAR valores do dataframe
+Códigos útilizados:
+df.to_string()
+df.to_clipboard()
+df.to_dict() ‘dict’, ‘list’, ‘series’, ‘split’, ‘records’, ‘index’
+df.to_html()
+df.to_numpy()
+df.to_markdown()
+df.to_latex()
+df. to_list()
+
+
+
+ARGS e KWARGS - Como utilizar? Python
+Códigos útilizados:
+def teste(*data):
+    print(data)
+teste(*['oi', 'teste', 1, [1, 2, 3]])
+
+def soma(*args):
+    return sum(args)
+
+def teste(**data):
+    print(data)
+teste(chave='oi', var='teste’)
+teste(**{'chave':'oi', 'var':'teste’})
+
+def teste(**data):
+    for i in data:
+        print(i)
+
+def teste(**data):
+    for i in data:
+        print(data[i])
+
+
+
+
+Como dividir COLUNAS por DELIMITADOR - Python PANDAS
+Códigos útilizados:
+df['Local'].str.split('/', expand=True)
+df[['Cidade', 'Estado']] = df['Local'].str.split('/', expand=True)
+df['Local'].str.split('/', expand=True, n=1)
+df['Local'].str.rsplit('/', expand=True, n=1)
+
+
+Como AGRUPAR dados por frequências de DATAS
+B - business day frequency
+C - custom business day frequency
+D - calendar day frequency
+W - weekly frequency
+M - month end frequency
+SM - semi-month end frequency (15th and end of month)
+BM - business month end frequency
+CBM - custom business month end frequency
+MS - month start frequency
+SMS - semi-month start frequency (1st and 15th)
+BMS -| business month start frequency
+CBMS - custom business month start frequency
+Q - quarter end frequency
+BQ - business quarter end frequency
+QS - quarter start frequency
+BQS - business quarter start frequency
+A, Y - year end frequency
+BA, BY - business year end frequency
+AS, YS - year start frequency
+BAS, BYS - business year start frequency
+BH - business hour frequency
+H - hourly frequency
+T, min - minutely frequency
+S - secondly frequency
+L, ms - milliseconds
+U, us - microseconds
+N - nanoseconds
+
+Códigos útilizados:
+df.groupby(pd.Grouper(key='Data', freq='2D')).sum()
+df.groupby(pd.Grouper(key='Data', freq='4D', origin=pd.to_datetime('2015-01-01'))).sum()
+df.groupby(pd.Grouper(key='Data', freq='4D', dropna=True)).sum()
+
+
+Como filtrar LINHAS pelo ÍNDICE - PANDAS Python
+Códigos útilizados:
+df[df.index == 12]
+df[df.index 'maior que'= 5]
+df[(df.index 'maior que'= 5) & (df.index 'menorque'= 10)]
+df[df.index.isin([1,2,3])]
+df[~df.index.isin([1,2,3])]
+
+
+
+Como filtrar colunas e linhas pelo TIPO dos dados - PANDAS Python
+Códigos útilizados:
+df.dtypes
+df.select_dtypes(include=['int64’])
+df.select_dtypes(include=['int64', bool])
+df.select_dtypes(exclude=['int64', bool])
+isinstance(5, bool)
+df[df['col1'].apply(lambda x: isinstance(x, bool))]
+
+
+Como filtar LINHAS com QUERY - PANDAS Python
+Códigos útilizados:
+df.query('col2 == 2’)
+df.query('col2 == 2 & col3 == True’)
+df.query('col2 == @a & col3 == True’)
+df.query('4 'maior que' col2 'maior que' 2’)
+df.query('`col 1` == 1’)
+df.query('`col 1` == "a"')
+
+
+ENTENDA Compreensão de lista no Python - List comprehension
+Códigos útilizados:
+lista = []
+for i in range(11):
+    lista.append(i)
+lista
+[i for i in range(11)]
+[i for i in range(11) if i % 2 == 0]
+[i for i in 'programe python’]
+[i for i in 'programe python' if i in 'aeiou’]
+[i for i in ['programe', 'python'] if i.startswith('p’)]
+a = [['programe', 'a'], ['python', 'b'], ['teste', 'c’]]
+[i[0] for i in a]
+[i[1] for i in a]
+[item for b in a for item in b]
+a = {'programe': 'a', 'python': 'b', 'teste': 'c’}
+[i for i in a]
+[i for i in a.values()]
+
+
+Como ITERAR linhas no dataframe do PANDAS - Python
+Códigos útilizados:
+for i in df.iterrows():
+    break
+i[1]
+for indice, linha in df.iterrows():
+    break
+Indice, linha
+linha['price’]
+'barato 'if linha['price'] 'menor que'= 1000 else 'caro’
+valores = []
+for indice, linha in df.iterrows():
+    valores.append('barato 'if linha['price'] 'menor que'= 1000 else 'caro')
+df['custo'] = valores
+
+
+
+itertuples: 30 vezes MAIS RÁPIDO que iterrows PANDAS - Python
+Códigos útilizados:
+for i in df.itertuples():
+    break
+itertuples(index=True, name=‘programe’)
+i.cut
+i.count(‘E’)
+valores = []
+for linha in df.itertuples():
+    valores.append('barato 'if linha.price 'menor que'= 1000 else 'caro')
+df['custo'] = valores
+
+
+# Iterar MUITO Mais RAPIDO 
+df['teste'] = 'ruim'
+df.loc[df['cut'].isin(['ideal', 'premium']), 'teste'] = 'bom'
+df.loc[df['cut'].isin(['very good', 'good']), 'teste'] = 'médio'
+
+
+
+Como ITERAR colunas de um dataframe - PANDAS Python
+Códigos útilizados:
+for i in df.iteritems():
+    break
+for nome, valores in df.iteritems():
+    break
+valores.mode()[0]
+moda = {}
+for nome, valores in df.iteritems():
+    moda[nome] = valores.mode()[0]
+
+
+
+
+Extraindo informações de DATAS - PANDAS - Python
+Códigos útilizados:
+df['Data'].dt.day
+df['Data'].dt.month
+df['Data'].dt.year
+df['Data'].dt.week
+df['Data'].dt.weekday
+df['Data'].dt.day_name()
+dias_ptbr = {'Sunday':'Domingo', 'Monday':'Segunda-feira', 'Tuesday':'Terça-feira', 'Wednesday':'Quarta-feira', 'Thursday':'Quinta-feira', 'Friday':'Sexta-feira', 'Saturday':'Sábado’}
+df['Data'].dt.day_name().replace(dias_ptbr)
+meses_ptbr = {'January':'Janeiro', 'February':'Fevereiro', 'March':'Março', 'April':'Abril', 'May':'Maio', 'June':'Junho', 'July':'Julho', 'August':'Agosto', 'September':'Setembro', 'October':'Outubro', 'November':'Novembro', 'December':'Dezembro’}
+df['Data'].dt.month_name().replace(meses_ptbr)
+df['Data'].dt.dayofyear
+df['Data'].dt.quarter
+s = pd.Series(pd.to_datetime('today’))
+s.dt.round(freq='D’)
+s.dt.ceil(freq='D’)
+s.dt.floor(freq='D')
+
+
+Verificações com DATAS e dias no mês - PANDAS Python
+Códigos útilizados:
+df['Data'].dt.is_month_end
+df['Data'].dt.is_month_start
+df['Data'].dt.is_quarter_start
+df['Data'].dt.is_quarter_end
+df['Data'].dt.is_year_start
+df['Data'].dt.is_year_end
+df['Data'].dt.daysinmonth
+
+
+Como deslocar (somar) DATAS no dataframe - PANDAS Python
+Códigos útilizados:
+pd.to_datetime('today') + pd.DateOffset(days=1)
+pd.to_datetime('today') + pd.DateOffset(day=1)
+pd.to_datetime('today') + pd.DateOffset(weeks=1)
+pd.to_datetime('today') + pd.tseries.offsets.Week()
+pd.to_datetime('today') + pd.tseries.offsets.Day()
+pd.to_datetime('2021-07-09') + pd.tseries.offsets.BDay()
+pd.to_datetime('2021-07-09') + pd.tseries.offsets.BMonthEnd()
+MonthEnd(), SemiMonthEnd(), BMonthBegin(), MonthBegin(), QuarterBegin(), QuarterEnd()
+df['Data'] + pd.tseries.offsets.QuarterEnd()
+pandas.tseries.offsets
+BYearEnd, BYearBegin, YearEnd, YearBegin
+
+
+Como FILTRAR datas no dataframe do PANDAS Python
+Códigos útilizados:
+df[df['Data'] == '2018-01-03’]
+df[df[‘Data'].dt.year == 2019]
+df[df[‘Data'].dt.month == 12]
+df[(df[‘Data'].dt.month == 12) & (df['Date'].dt.year == 2020)]
+df[df[‘Data'].between('2020-12-01', '2020-12-15’)]
+df[df['Data'].dt.day_name().isin(['Saturday', 'Sunday’])]
+df[df['Data'] 'maior que'= pd.to_datetime('today') - pd.DateOffset(months=3, day=1)]
+df[df['Data'] 'maior que'= pd.to_datetime('today').date() - pd.DateOffset(months=3, day=1)]
+
+
+
+Gráficos INTERATIVOS direto no PANDAS Python
+Códigos útilizados:
+!pip install plotly
+import pandas as pd
+import seaborn as sns
+pd.options.plotting.backend = "plotly"
+df = sns.load_dataset('tips')
+df.plot(kind='hist', x='sex')
+df.plot(kind='hist', x='tip', color='sex')
+df.plot.scatter(x='total_bill', y='tip', color='sex')
+df.plot.box(x='tip', y='sex', color='time')
+df2 = df.groupby(['day', 'sex'])['total_bill'].sum().reset_index().pivot('day', 'sex', 'total_bill')
+df2.plot(kind='barh')
+
+
+6. Crie um DataFrame a partir de vários arquivos
+
+Neste caso, glob() estará procurando no diretório de dados, todos os arquivos CSV que começam com a palavra ” data_row_ “. O glob()recupera nomes de arquivos em uma ordem arbitrária, e é por isso que classificamos a lista usando a função sort().
+ Para dados em linha
+Digamos que nosso dataset esteja distribuído por 2 arquivos em linhas: data_row_1.csv e data_row_2.csv.
+ 
+Para criar um DataFrame a partir dos 2 arquivos: 
+from glob import glob
+files = sorted(glob('data/data_row_*.csv'))
+pd.concat((pd.read_csv(file) for file in files), ignore_index=True)
+ sorted(glob('data/data_row_*.csv')) recupera nomes de arquivos. Depois disso, lemos cada um dos arquivos usando read_csv()e passamos os resultados para a função concat(), que conectará as linhas em um único DataFrame. Além disso, para evitar um valor duplicado no índice, dizemos ao concat()que ignore o index (ignore_index=True) e, em vez disso, use o índice inteiro padrão.
+ Para dados em colunas
+Digamos que nosso dataset esteja distribuído em 2 arquivos em colunas: data_col_1.csv e data_col_2.csv.
+#Para criar um DataFrame a partir dos 2 arquivos:
+files = sorted(glob('data/data_col_*.csv'))
+pd.concat((pd.read_csv(file) for file in files), axis=1)
+#Desta vez, dizemos à função concat() para conectar ao longo do eixo das colunas.
+---
+OTIMIZAR O TAMANHO DOS ARQUIVOS
+
+# Importe o pacote pyarrow (caso não tenha: pip install pyarrow)
+import pyarrow
+#Salvando um dataframe Pandas em .parquet
+df.to_parquet('/file path', engine='pyarrow', compression='gzip')
+# Lendo um arquivo parquet
+pd.read_parquet('/file path', engine='pyarrow')
+---
+#Salvando um dataframe Pandas em .pickle
+df.to_pickle('/file path', compression='gzip')
+# Lendo um arquivo parquet
+pd.read_pickle('/file path')
+
+Aumentar a Velocidade de Aplicação de Funções (BIGDATA) no Pandas
+
+#pip install swifter
+# Cria dataframe 10 million rows e 4 columns
+df = pd.DataFrame( np.random.randint(1,1000, size=(10000000,4)), columns =list('ABCD'))
+# Function: Column C - Column D
+def subtract_cd(c,d):
+    return c - d
+%%time
+# Regular apply
+df['subt'] = df.apply(lambda x: subtract_cd(x['C'], x['D']), axis=1)
+[Out]: 1 min 23 seg
+
+#Adicionamos apenas uma palavra no código: swifter
+import swifter
+%%time
+# Usando o Swifter
+df['subt'] = df.swifter.apply(lambda x: subtract_cd(x['C'], x['D']), axis=1)
+[Out]: 43 milisegundos
+
+Group By e Funções de Agregação
+
+# Cria dataframe
+df = pd.DataFrame({'Nome': ['D1', 'D1', 'D3', 'D3', 'D3', 'D7', 'D7'], 'A': [1, 2, 4, 8, 16, 32, 64],'B':[1,2,3,4,5,6,7]})
+# Funções para cada grupo
+funcs = ['sum', 'mean', 'std']
+# Colunas onde aplicaremos as funções
+stats = {'A':funcs, 'B': funcs}
+# Agrupamento
+df.groupby('Nome').agg(stats)
+
+
+PANDAS - CONCATENAR DATAFRAMES
+
+df1
+df2
+df3
+
+Frames = [df1, df2, df3]
+Result = pd.concat(Frames)
+
+TEMPO EXECUÇÃO
+%%time # the Wall time for entire cell
+Tqdm # progress bar
+
+
+
+
+
